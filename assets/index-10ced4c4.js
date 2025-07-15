@@ -201,16 +201,15 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
         #meetingsContainer {
           width: 100% !important;
           max-width: 100% !important;
-          overflow: hidden !important;
         }
         
         #meetingsContainer .meetings-iframe-container {
           width: 100% !important;
-          height: 500px !important;
+          height: calc(100vh - 120px) !important;
+          min-height: 800px !important;
           border: none !important;
           overflow: hidden !important;
           border-radius: 8px !important;
-          position: relative !important;
         }
         
         #meetingsContainer iframe {
@@ -218,26 +217,28 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
           border: none !important;
           width: 100% !important;
           height: 100% !important;
-          transform: scale(1) !important;
-          transform-origin: center center !important;
         }
         
-        /* Hide the right panel on step 2 for more space */
-        .step-2-layout .right-panel {
-          display: none !important;
+        /* Larger modal for step 2 */
+        .step-2-layout {
+          max-width: 90vw !important;
+          width: 90vw !important;
+          height: 95vh !important;
+          max-height: 95vh !important;
         }
         
         .step-2-layout .left-panel {
           flex: 1 !important;
           max-width: 100% !important;
-          width: 100% !important;
+          padding: 1rem !important;
+          height: 100% !important;
+          display: flex !important;
+          flex-direction: column !important;
         }
         
-        /* Ensure meetings container fits properly in modal */
-        .step-2-layout #meetingsContainer {
-          width: 100% !important;
-          max-width: 100% !important;
-          min-height: 500px !important;
+        /* Hide the right panel on step 2 for more space */
+        .step-2-layout .right-panel {
+          display: none !important;
         }
         
         /* Responsive adjustments */
@@ -246,17 +247,24 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
             font-size: 16px !important;
           }
           
-          #meetingsContainer .meetings-iframe-container {
-            height: 450px !important;
+          .step-2-layout {
+            max-width: 95vw !important;
+            width: 95vw !important;
+            height: 90vh !important;
+            max-height: 90vh !important;
           }
           
-          #meetingsContainer iframe {
-            transform: scale(1) !important;
+          .step-2-layout .left-panel {
+            padding: 0.5rem !important;
+          }
+          
+          #meetingsContainer .meetings-iframe-container {
+            height: 600px !important;
           }
         }
       `,document.head.appendChild(d)}},[]),v.useEffect(()=>{if(window.hbspt)console.log("HubSpot script already available"),window.hbsptLoaded=!0;else{console.log("Loading HubSpot script...");const d=document.createElement("script");d.src="https://js.hsforms.net/forms/embed/v2.js",d.type="text/javascript",d.charset="utf-8",d.onload=()=>{console.log("HubSpot script loaded successfully"),console.log("window.hbspt available:",!!window.hbspt),window.hbsptLoaded=!0},d.onerror=()=>{console.error("Failed to load HubSpot script")},console.log("Adding script to document body..."),document.body.appendChild(d),setTimeout(()=>{console.log("Timeout check - window.hbspt available:",!!window.hbspt),console.log("Script element in DOM:",document.querySelector('script[src*="hsforms"]')!==null)},3e3)}if(!document.querySelector('script[src*="MeetingsEmbedCode.js"]')){console.log("Loading HubSpot Meetings script...");const d=document.createElement("script");d.src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js",d.type="text/javascript",d.onload=()=>{console.log("HubSpot Meetings script loaded successfully")},document.body.appendChild(d)}},[]),v.useEffect(()=>{if(n&&window.hbspt&&!i&&o===1){const d=setTimeout(()=>{console.log("Form creation effect triggered (delayed):",{open:n,hubspotFormRefCurrent:!!c.current,windowHbspt:!!window.hbspt,formLoaded:i,currentStep:o});const f=document.getElementById("hubspotForm");if(console.log("Element by ID:",f),f&&window.hbspt&&!i){console.log("All conditions met. Creating HubSpot form..."),console.log("Target element:",f),console.log("Target element ID:",f.id);try{window.hbspt.forms.create({portalId:"7594808",formId:"5969ec42-4fe5-42c0-8cc8-91e3d0eb8bde",region:"na1",target:"#hubspotForm",onFormReady:()=>{console.log("HubSpot form ready"),s(!0)},onFormSubmit:()=>{console.log("HubSpot form submitted - moving to step 2"),setTimeout(()=>{l(2)},1e3)}}),console.log("hbspt.forms.create called successfully")}catch(h){console.error("Error creating HubSpot form:",h)}}else console.log("Conditions not met for form creation:",{open:n,hasRef:!!c.current,hasElementById:!!f,hasHbspt:!!window.hbspt,formLoaded:i,currentStep:o})},100);return()=>clearTimeout(d)}},[n,i,o]),v.useEffect(()=>{if(o===2&&u.current){console.log("Step 2 reached, preparing meetings embed...");const d=()=>{const h=u.current;h&&!h.querySelector(".meetings-iframe-container")&&(console.log("Adding meetings embed container..."),h.innerHTML=`
             <div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/david-b12?embed=true"></div>
-          `,setTimeout(()=>{const g=document.querySelector(".meetings-iframe-container");console.log("Embed element found:",g),console.log("Embed element innerHTML:",g==null?void 0:g.innerHTML),console.log("Embed element attributes:",g==null?void 0:g.attributes);const w=document.querySelectorAll('script[src*="MeetingsEmbedCode"]');if(console.log("Found meetings scripts:",w.length),w.length>0){const x=document.createElement("script");x.src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js",x.onload=()=>{console.log("Meetings script re-executed")},document.head.appendChild(x)}console.log("Meetings embed container added and DOM event triggered")},1e3))},f=()=>{document.querySelector('script[src*="MeetingsEmbedCode.js"]')?(console.log("Meetings script found, loading embed with delay..."),setTimeout(d,500)):(console.log("Meetings script not yet loaded, retrying..."),setTimeout(f,200))};f()}},[o]),v.useEffect(()=>{n||(s(!1),l(1),c.current&&(c.current.innerHTML=""),u.current&&(u.current.innerHTML=""))},[n]),v.useEffect(()=>{console.log("Ref monitoring effect - hubspotFormRef.current:",c.current)},[c.current]),a.jsxs(Qj,{open:n,onOpenChange:r,children:[a.jsx(Xj,{asChild:!0,children:a.jsx("button",{className:e,children:t})}),a.jsxs(Jg,{className:`max-w-4xl p-0 bg-gradient-to-br from-[#0B0E1A] to-[#1A1F3A] text-white rounded-2xl overflow-hidden shadow-2xl border border-gray-800 ${o===2?"step-2-layout":""}`,children:[a.jsxs(ny,{children:[a.jsx(ey,{children:o===1?"Get a Tailored Demo":"Schedule Your Demo"}),a.jsx(ty,{children:o===1?"Fill out the form to request a tailored demo of DemandForecast.ai.":"Choose a convenient time to schedule your personalized demo."})]}),a.jsxs("div",{className:"flex flex-col md:flex-row w-full",children:[a.jsx("div",{className:`flex-1 p-8 flex flex-col justify-center left-panel ${o===2?"max-w-full":""}`,children:o===1?a.jsxs(a.Fragment,{children:[a.jsxs("div",{className:"flex flex-col items-center mb-6",children:[a.jsx("div",{className:"flex items-center mb-4",children:a.jsxs("div",{className:"flex items-center space-x-2",children:[a.jsx("div",{className:"w-8 h-8 bg-[#3D5AFE] text-white rounded-full flex items-center justify-center text-sm font-semibold",children:"1"}),a.jsx("span",{className:"text-sm text-gray-300",children:"Your Details"}),a.jsx("div",{className:"w-12 h-0.5 bg-gray-600"}),a.jsx("div",{className:"w-8 h-8 bg-gray-600 text-gray-400 rounded-full flex items-center justify-center text-sm",children:"2"}),a.jsx("span",{className:"text-sm text-gray-500",children:"Schedule Demo"})]})}),a.jsx("h2",{className:"text-2xl font-bold text-white mb-1",children:"Get a Tailored Demo"}),a.jsx("p",{className:"text-gray-300 mb-6 text-base",children:"Optimize Your AI Strategy"})]}),a.jsx("div",{id:"hubspotForm",ref:c})]}):a.jsxs(a.Fragment,{children:[a.jsxs("div",{className:"flex flex-col items-center mb-6",children:[a.jsx("div",{className:"flex items-center mb-4",children:a.jsxs("div",{className:"flex items-center space-x-2",children:[a.jsx("div",{className:"w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm",children:"✓"}),a.jsx("span",{className:"text-sm text-gray-300",children:"Your Details"}),a.jsx("div",{className:"w-12 h-0.5 bg-[#3D5AFE]"}),a.jsx("div",{className:"w-8 h-8 bg-[#3D5AFE] text-white rounded-full flex items-center justify-center text-sm font-semibold",children:"2"}),a.jsx("span",{className:"text-sm text-gray-300",children:"Schedule Demo"})]})}),a.jsx("h2",{className:"text-2xl font-bold text-white mb-1",children:"Schedule Your Demo"}),a.jsx("p",{className:"text-gray-300 mb-4 text-base",children:"Choose a convenient time for your personalized demo"})]}),a.jsx("div",{id:"meetingsContainer",ref:u})]})}),a.jsxs("div",{className:`hidden md:flex flex-1 bg-gradient-to-br from-[#1A1F3A] to-[#0B0E1A] items-center justify-center p-8 relative border-l border-gray-800 right-panel ${o===2?"hidden":""}`,children:[a.jsx("div",{className:"absolute inset-0 bg-gradient-to-br from-[#3D5AFE]/10 to-[#7C4DFF]/10 rounded-xl"}),a.jsxs("div",{className:"relative z-10 text-center",children:[a.jsx("img",{src:"/images/demandforecast-logo.png",alt:"DemandForecast.ai",className:"max-w-full h-48 w-auto mb-6"}),o===2&&a.jsxs("div",{className:"text-center",children:[a.jsx("h3",{className:"text-xl font-semibold text-white mb-3",children:"🎉 Almost There!"}),a.jsx("p",{className:"text-gray-300 text-sm leading-relaxed",children:"Thanks for your interest! Now let's find the perfect time for your personalized demo."})]})]})]})]})]})]})}function t2({children:e,currentPageName:t}){const[n,r]=v.useState(!1),[i,s]=v.useState(!1),o=[{title:"Product",href:"/proactive-humble-ai"},{title:"Customer Stories",href:"/customer-stories"},{title:"Blog",href:"/resources"},{title:"About Us",href:"/about"}],l=[];v.useEffect(()=>{const u=()=>{s(window.scrollY>10)};return window.addEventListener("scroll",u),()=>window.removeEventListener("scroll",u)},[]);const c=({className:u})=>a.jsxs("nav",{className:u,children:[o.map(d=>a.jsx(gt,{to:d.href,onClick:()=>r(!1),className:"text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium",children:d.title},d.title)),l.map(d=>a.jsx(gt,{to:f1(d.page),onClick:()=>r(!1),className:"text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium",children:d.title},d.title))]});return a.jsxs("div",{className:"bg-[#0B0E1A] text-white font-sans min-h-screen flex flex-col",children:[a.jsx("style",{children:`
+          `,setTimeout(()=>{const g=document.querySelector(".meetings-iframe-container");console.log("Embed element found:",g),console.log("Embed element innerHTML:",g==null?void 0:g.innerHTML),console.log("Embed element attributes:",g==null?void 0:g.attributes);const w=document.querySelectorAll('script[src*="MeetingsEmbedCode"]');if(console.log("Found meetings scripts:",w.length),w.length>0){const x=document.createElement("script");x.src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js",x.onload=()=>{console.log("Meetings script re-executed")},document.head.appendChild(x)}console.log("Meetings embed container added and DOM event triggered")},1e3))},f=()=>{document.querySelector('script[src*="MeetingsEmbedCode.js"]')?(console.log("Meetings script found, loading embed with delay..."),setTimeout(d,500)):(console.log("Meetings script not yet loaded, retrying..."),setTimeout(f,200))};f()}},[o]),v.useEffect(()=>{n||(s(!1),l(1),c.current&&(c.current.innerHTML=""),u.current&&(u.current.innerHTML=""))},[n]),v.useEffect(()=>{console.log("Ref monitoring effect - hubspotFormRef.current:",c.current)},[c.current]),a.jsxs(Qj,{open:n,onOpenChange:r,children:[a.jsx(Xj,{asChild:!0,children:a.jsx("button",{className:e,children:t})}),a.jsxs(Jg,{className:`${o===1?"max-w-4xl h-[90vh]":"max-w-6xl h-[98vh]"} p-0 bg-gradient-to-br from-[#0B0E1A] to-[#1A1F3A] text-white rounded-2xl overflow-hidden shadow-2xl border border-gray-800 ${o===2?"step-2-layout":""}`,children:[a.jsxs(ny,{children:[a.jsx(ey,{children:o===1?"Get a Tailored Demo":"Schedule Your Demo"}),a.jsx(ty,{children:o===1?"Fill out the form to request a tailored demo of DemandForecast.ai.":"Choose a convenient time to schedule your personalized demo."})]}),a.jsxs("div",{className:"flex flex-col md:flex-row w-full",children:[a.jsx("div",{className:`flex-1 ${o===2?"p-4 max-w-full":"p-8"} flex flex-col ${o===2?"":"justify-center"} left-panel`,children:o===1?a.jsxs(a.Fragment,{children:[a.jsxs("div",{className:"flex flex-col items-center mb-6",children:[a.jsx("div",{className:"flex items-center mb-4",children:a.jsxs("div",{className:"flex items-center space-x-2",children:[a.jsx("div",{className:"w-8 h-8 bg-[#3D5AFE] text-white rounded-full flex items-center justify-center text-sm font-semibold",children:"1"}),a.jsx("span",{className:"text-sm text-gray-300",children:"Your Details"}),a.jsx("div",{className:"w-12 h-0.5 bg-gray-600"}),a.jsx("div",{className:"w-8 h-8 bg-gray-600 text-gray-400 rounded-full flex items-center justify-center text-sm",children:"2"}),a.jsx("span",{className:"text-sm text-gray-500",children:"Schedule Demo"})]})}),a.jsx("h2",{className:"text-2xl font-bold text-white mb-1",children:"Get a Tailored Demo"}),a.jsx("p",{className:"text-gray-300 mb-6 text-base",children:"Optimize Your AI Strategy"})]}),a.jsx("div",{id:"hubspotForm",ref:c})]}):a.jsxs(a.Fragment,{children:[a.jsxs("div",{className:"flex flex-col items-center mb-2",children:[a.jsx("div",{className:"flex items-center mb-2",children:a.jsxs("div",{className:"flex items-center space-x-2",children:[a.jsx("div",{className:"w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm",children:"✓"}),a.jsx("span",{className:"text-sm text-gray-300",children:"Your Details"}),a.jsx("div",{className:"w-12 h-0.5 bg-[#3D5AFE]"}),a.jsx("div",{className:"w-8 h-8 bg-[#3D5AFE] text-white rounded-full flex items-center justify-center text-sm font-semibold",children:"2"}),a.jsx("span",{className:"text-sm text-gray-300",children:"Schedule Demo"})]})}),a.jsx("h2",{className:"text-xl font-bold text-white",children:"Schedule Your Demo"})]}),a.jsx("div",{id:"meetingsContainer",ref:u,className:"flex-1 min-h-0 h-full"})]})}),a.jsxs("div",{className:`hidden md:flex flex-1 bg-gradient-to-br from-[#1A1F3A] to-[#0B0E1A] items-center justify-center p-8 relative border-l border-gray-800 right-panel ${o===2?"hidden":""}`,children:[a.jsx("div",{className:"absolute inset-0 bg-gradient-to-br from-[#3D5AFE]/10 to-[#7C4DFF]/10 rounded-xl"}),a.jsxs("div",{className:"relative z-10 text-center",children:[a.jsx("img",{src:"/images/demandforecast-logo.png",alt:"DemandForecast.ai",className:"max-w-full h-48 w-auto mb-6"}),o===2&&a.jsxs("div",{className:"text-center",children:[a.jsx("h3",{className:"text-xl font-semibold text-white mb-3",children:"🎉 Almost There!"}),a.jsx("p",{className:"text-gray-300 text-sm leading-relaxed",children:"Thanks for your interest! Now let's find the perfect time for your personalized demo."})]})]})]})]})]})]})}function t2({children:e,currentPageName:t}){const[n,r]=v.useState(!1),[i,s]=v.useState(!1),o=[{title:"Product",href:"/proactive-humble-ai"},{title:"Customer Stories",href:"/customer-stories"},{title:"Blog",href:"/resources"},{title:"About Us",href:"/about"}],l=[];v.useEffect(()=>{const u=()=>{s(window.scrollY>10)};return window.addEventListener("scroll",u),()=>window.removeEventListener("scroll",u)},[]);const c=({className:u})=>a.jsxs("nav",{className:u,children:[o.map(d=>a.jsx(gt,{to:d.href,onClick:()=>r(!1),className:"text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium",children:d.title},d.title)),l.map(d=>a.jsx(gt,{to:f1(d.page),onClick:()=>r(!1),className:"text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium",children:d.title},d.title))]});return a.jsxs("div",{className:"bg-[#0B0E1A] text-white font-sans min-h-screen flex flex-col",children:[a.jsx("style",{children:`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         .font-sans {
           font-family: 'Inter', sans-serif;
