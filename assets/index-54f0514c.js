@@ -201,14 +201,16 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
         #meetingsContainer {
           width: 100% !important;
           max-width: 100% !important;
+          overflow: hidden !important;
         }
         
         #meetingsContainer .meetings-iframe-container {
           width: 100% !important;
-          height: 450px !important;
+          height: 500px !important;
           border: none !important;
           overflow: hidden !important;
           border-radius: 8px !important;
+          position: relative !important;
         }
         
         #meetingsContainer iframe {
@@ -216,8 +218,8 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
           border: none !important;
           width: 100% !important;
           height: 100% !important;
-          transform: scale(0.9) !important;
-          transform-origin: top left !important;
+          transform: scale(1) !important;
+          transform-origin: center center !important;
         }
         
         /* Hide the right panel on step 2 for more space */
@@ -228,6 +230,14 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
         .step-2-layout .left-panel {
           flex: 1 !important;
           max-width: 100% !important;
+          width: 100% !important;
+        }
+        
+        /* Ensure meetings container fits properly in modal */
+        .step-2-layout #meetingsContainer {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-height: 500px !important;
         }
         
         /* Responsive adjustments */
@@ -237,11 +247,11 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
           }
           
           #meetingsContainer .meetings-iframe-container {
-            height: 400px !important;
+            height: 450px !important;
           }
           
           #meetingsContainer iframe {
-            transform: scale(0.85) !important;
+            transform: scale(1) !important;
           }
         }
       `,document.head.appendChild(d)}},[]),v.useEffect(()=>{if(window.hbspt)console.log("HubSpot script already available"),window.hbsptLoaded=!0;else{console.log("Loading HubSpot script...");const d=document.createElement("script");d.src="https://js.hsforms.net/forms/embed/v2.js",d.type="text/javascript",d.charset="utf-8",d.onload=()=>{console.log("HubSpot script loaded successfully"),console.log("window.hbspt available:",!!window.hbspt),window.hbsptLoaded=!0},d.onerror=()=>{console.error("Failed to load HubSpot script")},console.log("Adding script to document body..."),document.body.appendChild(d),setTimeout(()=>{console.log("Timeout check - window.hbspt available:",!!window.hbspt),console.log("Script element in DOM:",document.querySelector('script[src*="hsforms"]')!==null)},3e3)}if(!document.querySelector('script[src*="MeetingsEmbedCode.js"]')){console.log("Loading HubSpot Meetings script...");const d=document.createElement("script");d.src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js",d.type="text/javascript",d.onload=()=>{console.log("HubSpot Meetings script loaded successfully")},document.body.appendChild(d)}},[]),v.useEffect(()=>{if(n&&window.hbspt&&!i&&o===1){const d=setTimeout(()=>{console.log("Form creation effect triggered (delayed):",{open:n,hubspotFormRefCurrent:!!c.current,windowHbspt:!!window.hbspt,formLoaded:i,currentStep:o});const f=document.getElementById("hubspotForm");if(console.log("Element by ID:",f),f&&window.hbspt&&!i){console.log("All conditions met. Creating HubSpot form..."),console.log("Target element:",f),console.log("Target element ID:",f.id);try{window.hbspt.forms.create({portalId:"7594808",formId:"5969ec42-4fe5-42c0-8cc8-91e3d0eb8bde",region:"na1",target:"#hubspotForm",onFormReady:()=>{console.log("HubSpot form ready"),s(!0)},onFormSubmit:()=>{console.log("HubSpot form submitted - moving to step 2"),setTimeout(()=>{l(2)},1e3)}}),console.log("hbspt.forms.create called successfully")}catch(h){console.error("Error creating HubSpot form:",h)}}else console.log("Conditions not met for form creation:",{open:n,hasRef:!!c.current,hasElementById:!!f,hasHbspt:!!window.hbspt,formLoaded:i,currentStep:o})},100);return()=>clearTimeout(d)}},[n,i,o]),v.useEffect(()=>{if(o===2&&u.current){console.log("Step 2 reached, preparing meetings embed...");const d=()=>{const h=u.current;h&&!h.querySelector(".meetings-iframe-container")&&(console.log("Adding meetings embed container..."),h.innerHTML=`
