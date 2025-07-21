@@ -1,0 +1,13 @@
+<svg width="400" height="140" viewBox="0 0 400 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pecan Icon (precise, matching provided image) -->
+  <g transform="translate(10,30)">
+    <rect x="0" y="0" width="48" height="48" rx="12" fill="#232826"/>
+    <circle cx="18" cy="18" r="12" fill="#fff"/>
+    <rect x="0" y="30" width="24" height="18" rx="4" fill="#232826"/>
+    <rect x="30" y="0" width="18" height="24" rx="4" fill="#232826"/>
+    <rect x="30" y="30" width="18" height="18" rx="4" fill="#232826"/>
+  </g>
+  <!-- Text: Demand Forecast.ai stacked, left-aligned -->
+  <text x="80" y="70" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700" fill="#232826">Demand</text>
+  <text x="80" y="120" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700" fill="#232826">Forecast.ai</text>
+</svg> 
