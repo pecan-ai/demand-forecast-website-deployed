@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://pecan-ai.github.io/demand-forecast-website-deployed/sitemap.xml
+Sitemap: https://demandforecast.ai/sitemap.xml
 
 # Crawl delay (optional)
 Crawl-delay: 1
