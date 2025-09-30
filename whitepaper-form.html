@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Whitepaper - Human and AI Collaboration in Supply Chain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0B0E1A 0%, #1A1F3A 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .form-container {
+            background: transparent;
+            padding: 1rem;
+            width: 100%;
+        }
+        
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem 0;
+        }
+        
+        .spinner {
+            width: 2rem;
+            height: 2rem;
+            border: 2px solid rgba(61, 90, 254, 0.3);
+            border-top: 2px solid #3D5AFE;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            color: #EF4444;
+            padding: 1rem;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .retry-btn {
+            background: #3D5AFE;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .retry-btn:hover {
+            background: #2C3ECF;
+        }
+        
+        /* HubSpot Form Styles */
+        #hubspot-form-container .hs-form {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+        
+        #hubspot-form-container .hs-form-field {
+            margin-bottom: 1.5rem !important;
+        }
+        
+        #hubspot-form-container .hs-form-field label {
+            color: #ffffff !important;
+            font-weight: 500 !important;
+            font-size: 0.875rem !important;
+            margin-bottom: 0.5rem !important;
+            display: block !important;
+        }
+        
+        #hubspot-form-container .hs-input {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            border-radius: 0.5rem !important;
+            color: #ffffff !important;
+            padding: 0.75rem 1rem !important;
+            font-size: 1rem !important;
+            width: 100% !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        #hubspot-form-container .hs-input:focus {
+            outline: none !important;
+            border-color: #3D5AFE !important;
+            background: rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 0 0 3px rgba(61, 90, 254, 0.1) !important;
+        }
+        
+        #hubspot-form-container .hs-input::placeholder {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+        
+        #hubspot-form-container .hs-button {
+            background: linear-gradient(135deg, #3D5AFE 0%, #2C3ECF 100%) !important;
+            border: none !important;
+            border-radius: 0.5rem !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+            padding: 0.875rem 2rem !important;
+            width: 100% !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        #hubspot-form-container .hs-button:hover:not(.disabled) {
+            background: linear-gradient(135deg, #2C3ECF 0%, #1A2BCF 100%) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 12px rgba(61, 90, 254, 0.3) !important;
+        }
+        
+        #hubspot-form-container .hs-error-msgs {
+            color: #ff6b6b !important;
+            font-size: 0.875rem !important;
+            margin-top: 0.25rem !important;
+        }
+        
+        #hubspot-form-container .hs-form-required {
+            color: #ff6b6b !important;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div id="hubspot-form-container">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading form...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get UTM parameters from URL
+        function getUTMParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const utmParams = {};
+            
+            const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+            utmKeys.forEach(key => {
+                const value = urlParams.get(key);
+                if (value) {
+                    utmParams[key] = value;
+                }
+            });
+            
+            // Add landing page
+            utmParams['landing_page'] = window.location.href;
+            
+            return utmParams;
+        }
+
+        // Load HubSpot form
+        function loadHubSpotForm() {
+            const script = document.createElement('script');
+            script.src = 'https://js.hsforms.net/forms/embed/v2.js';
+            script.type = 'text/javascript';
+            script.charset = 'utf-8';
+            
+            script.onload = function() {
+                console.log('HubSpot script loaded');
+                createForm();
+            };
+            
+            script.onerror = function() {
+                console.error('Failed to load HubSpot script');
+                showError();
+            };
+            
+            document.body.appendChild(script);
+        }
+
+        function createForm() {
+            try {
+                const utmParams = getUTMParams();
+                console.log('Creating HubSpot form with UTM params:', utmParams);
+                
+                window.hbspt.forms.create({
+                    portalId: '7594808',
+                    formId: '1795b07b-8d6c-4512-a57f-330d7d1a5fca',
+                    region: 'na1',
+                    target: '#hubspot-form-container',
+                    onFormReady: function($form) {
+                        console.log('HubSpot form ready');
+                        
+                        // Hide loading spinner
+                        const loading = document.getElementById('loading');
+                        if (loading) {
+                            loading.style.display = 'none';
+                        }
+                        
+                        // Inject UTM parameters into form using vanilla JavaScript
+                        Object.keys(utmParams).forEach(key => {
+                            const field = document.querySelector(`input[name="${key}"]`);
+                            if (field) {
+                                field.value = utmParams[key];
+                            } else {
+                                // Create hidden field if it doesn't exist
+                                const hiddenField = document.createElement('input');
+                                hiddenField.type = 'hidden';
+                                hiddenField.name = key;
+                                hiddenField.value = utmParams[key];
+                                document.querySelector('#hubspot-form-container form').appendChild(hiddenField);
+                            }
+                        });
+                    },
+                    onFormSubmit: function(submitData) {
+                        console.log('Form submitted:', submitData);
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating HubSpot form:', error);
+                showError();
+            }
+        }
+
+        function showError() {
+            const container = document.getElementById('hubspot-form-container');
+            container.innerHTML = `
+                <div class="error">
+                    <p>Unable to load form. Please try refreshing the page.</p>
+                    <button class="retry-btn" onclick="window.location.reload()">Refresh Page</button>
+                </div>
+            `;
+        }
+
+        // Start loading the form
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(loadHubSpotForm, 500);
+        });
+    </script>
+</body>
+</html>
